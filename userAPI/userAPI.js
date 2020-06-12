@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var firebase = require("../firebase.js");
-
+// :uid รับตัวอักษร
 router.get("/logIn/:uid", (req, res) => {
   const UID=req.params.uid;
 
@@ -16,7 +16,8 @@ router.get("/logIn/:uid", (req, res) => {
       snapshot.forEach((elem)=> {
         list.push(elem.val());
     });
-    res.json(list);
+    //ส่งค่ากลับไป
+ res.json(list);
       console.log(list);
 
     });
