@@ -25,3 +25,17 @@
 
 // เพิ่มเติม จัดการUser id
 https://firebase.google.com/docs/auth/admin/manage-users#node.js
+
+
+
+
+
+
+
+echo "# backend" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/jaykittiwat/backend.git
+git push -u origin master
+                
