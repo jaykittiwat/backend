@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const router =require('./userAPI/userAPI');
 const routerRegistorcow =require('./routecow/regiscow/registercow');
+const routerFatter =require('./routecow/manageDam/fatterAPI');
 const firebase=require('./firebase');
 //body-paser สำหรับ post method 
 app.locals.firebase = firebase;
@@ -27,6 +28,7 @@ var header = function (req, res, next) {
 
 app.use('/user',header,router);//เปลี่ยนpath ของไฟร์api    router=req(ข้างบน) เพื่อความถูดกต้องของข้อมูล้อง 
 app.use('/user/cow',header,routerRegistorcow);//ลงทะเบียนวัว
+app.use('/user/cow',header,routerFatter);//จัดการแม่โคบำรุง
 
 
 const port = 4000;
