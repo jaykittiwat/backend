@@ -7,7 +7,7 @@ var firebase = require("./../../firebase");
 //ลงทะเบียนวัว
 router.post("/registor/:UID", (req, res,) => {
   const UID=req.params.UID;
-console.log(req.body);
+
       firebase
       .firebase()
       .ref()
