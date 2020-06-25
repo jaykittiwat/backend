@@ -4,7 +4,10 @@ const bodyParser = require("body-parser");
 const firebase = require("./firebase");
 const router = require("./userAPI/userAPI");
 const routerRegistorcow = require("./routecow/regiscow/registercow");
-const routerFatter = require("./routecow/manageDam/fattenAPI");
+const cattle = require("./routecow/manageDam/cattle");
+const history=require("./routecow/manageDam/history");
+const notification=require("./routecow/manageDam/notification")
+const maintain=require('./routecow/manageDam/maintain');
 //body-paser สำหรับ post method
 app.locals.firebase = firebase;
 app.use(bodyParser.json());
@@ -30,7 +33,10 @@ var header = function(req, res, next) {
 
 app.use("/user", header, router); //เปลี่ยนpath ของไฟร์api    router=req(ข้างบน) เพื่อความถูดกต้องของข้อมูล้อง
 app.use("/user/cow", header, routerRegistorcow); //ลงทะเบียนวัว
-app.use("/user/cow", header, routerFatter); //จัดการแม่โคบำรุง
+app.use("/cattle", header, cattle); //จัดการแม่โคบำรุง
+app.use("/history", header, history); //จัดการแม่โคบำรุง
+app.use("/maintain", header, maintain); //จัดการแม่โคบำรุง
+app.use("/notification", header, notification); //จัดการแม่โคบำรุง
 
 const port = 4000;
 app.listen(port, () => {

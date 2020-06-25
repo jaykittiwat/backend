@@ -3,7 +3,7 @@ var router = express.Router();
 var firebase = require("../../firebase");
 
 //บำรุง
-router.get('/fatten/:UID',  (req, res)=> {
+router.get('/show/:UID',  (req, res)=> {
   const uid = req.params.UID;
   firebase
     .firebase()
@@ -14,23 +14,23 @@ router.get('/fatten/:UID',  (req, res)=> {
     .once("value", snapshot => {
       //console.log(Object.keys(snapshot.val()))
       //console.log(snapshot)
-    
      res.send(snapshot.val())
-   
-     
     });
   
   })
 
 
-//Updata status:"บำรุงแล้ว" 
-  router.post("/fatten/:UID/:key_cattle", (req, res) => {
+
+  router.post("/status/:UID/:key_cattle", (req, res) => {
     var key=req.params.key_cattle;
-    var uid=req.params.uid;
+    var uid=req.params.UID; 
    firebase.firebase().ref("cattle/"+uid+"/"+key).update(req.body);
- res.send("สำเร็จ")
+
   });
 
+
+
+ 
 
 
 module.exports = router;
