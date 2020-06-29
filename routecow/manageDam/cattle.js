@@ -18,6 +18,26 @@ router.get('/show/:UID',  (req, res)=> {
     });
   
   })
+//เหนี่ยวนำ
+router.get('/show/:UID/:idCattle',  (req, res)=> {
+  const uid = req.params.UID;
+  const Cattle_id= req.params.idCattle;
+  firebase
+    .firebase()
+    .ref()
+    .child("cattle/"+uid)
+    .orderByChild("cattle_id")
+    .equalTo(Cattle_id)
+    .once("value", snapshot => {
+      if(snapshot.val()!==null){
+        res.json(snapshot.val())
+      }
+    else{
+      res.send("ไม่มีข้อมูล")
+    }
+    });
+  
+  })
 
 
 

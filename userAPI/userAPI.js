@@ -12,6 +12,7 @@ router.get("/logIn/:uid", (req, res) => {
     .orderByChild("email")
     .equalTo(UID)
     .on("value", snapshot => {
+     //console.log(snapshot)
       var list = [];
       snapshot.forEach(elem => {
         list.push(elem.val());
