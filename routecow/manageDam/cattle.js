@@ -12,8 +12,6 @@ router.get('/show/:UID',  (req, res)=> {
     .orderByChild("sex")
     .equalTo("MISS")
     .once("value", snapshot => {
-      //console.log(Object.keys(snapshot.val()))
-      //console.log(snapshot)
      res.send(snapshot.val())
     });
   
@@ -45,6 +43,8 @@ router.get('/show/:UID/:idCattle',  (req, res)=> {
     var key=req.params.key_cattle;
     var uid=req.params.UID; 
    firebase.firebase().ref("cattle/"+uid+"/"+key).update(req.body);
+   
+   res.end();
 
   });
 
