@@ -43,7 +43,7 @@ router.get('/show/:UID/:idCattle',  (req, res)=> {
     var key=req.params.key_cattle;
     var uid=req.params.UID; 
    firebase.firebase().ref("cattle/"+uid+"/"+key).update(req.body);
-   
+   res.send("บันทึกสำเร็จ")
    res.end();
 
   });

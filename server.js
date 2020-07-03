@@ -8,6 +8,8 @@ const cattle = require("./routecow/manageDam/cattle");
 const history=require("./routecow/manageDam/history");
 const notification=require("./routecow/manageDam/notification")
 const maintain=require('./routecow/manageDam/maintain');
+const synchronize=require('./routecow/manageDam/synchronize');
+
 //body-paser สำหรับ post method
 app.locals.firebase = firebase;
 app.use(bodyParser.json());
@@ -37,6 +39,7 @@ app.use("/cattle", header, cattle); //จัดการแม่โคบำร
 app.use("/history", header, history); //จัดการแม่โคบำรุง
 app.use("/maintain", header, maintain); //จัดการแม่โคบำรุง
 app.use("/notification", header, notification); //จัดการแม่โคบำรุง
+app.use("/synchronize", header, synchronize); //เหี่นยวนำ
 
 const port = 4000;
 app.listen(port, () => {
