@@ -13,7 +13,7 @@ router.post("/:UID", (req, res) => {
         .child("history/"+uid)
         .push()
         .set(req.body);
-     
+        res.status(201)
     });
 
 module.exports = router;
