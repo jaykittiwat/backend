@@ -12,7 +12,7 @@ router.post("/:UID", (req, res) => {
         .child("maintain/"+uid)
         .push()
         .set(req.body);
-        res.status(201)
+        
     });
 
 
