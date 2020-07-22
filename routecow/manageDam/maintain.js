@@ -4,16 +4,30 @@ var firebase = require("../../firebase");
 
 
 router.post("/:UID", (req, res) => {  
-    var uid=req.params.UID; 
- 
+    
+    const uid=req.params.UID; 
+//console.log(req.body)
         firebase
         .firebase()
-        .ref()
-        .child("maintain/"+uid)
-        .push()
-        .set(req.body);
+        .ref("maintain/"+uid)
+        .push(req.body).once('value',d=>{
+  //          console.log(d.val());
+            if(d != undefined || d != null || d != ''){
+                var json  = {
+                    status: "OK",
+                    data: d.val()
+                }
+                res.status(200).json(json);
+            } else {
+                var json  = {
+                    status: 500,
+                    err: d.val()
+                }
+                res.status(500).json(json);
+            }
+        })
         
-    });
+    })
 
 
 module.exports = router;

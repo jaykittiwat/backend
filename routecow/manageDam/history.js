@@ -9,10 +9,9 @@ router.post("/:UID", (req, res) => {
 
         firebase
         .firebase()
-        .ref()
-        .child("history/"+uid)
-        .push()
-        .set(req.body);
+        .ref("history/"+uid)
+        .push(req.body)
+  
      
     });
 

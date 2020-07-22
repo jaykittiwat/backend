@@ -12,7 +12,7 @@ router.get("/:UID/:Date", (req, res) => {
     .ref()
     .child("notification/" + uid)
     .once("value", snapshot => {
-      console.log(snapshot.val())
+      //console.log(snapshot.val())
       var list = [];
       var listDate = [];
 
@@ -43,12 +43,12 @@ router.get("/:UID/:Date", (req, res) => {
       }
       if(listCheck.length!=0&&listCheckoverdate==0){
         const DataFillter = Object.assign.apply({}, listCheck);
-        console.log(DataFillter)
+        //console.log(DataFillter)
         res.json(DataFillter);
       }
       if(listCheck.length!=0&&listCheckoverdate!=0){
         const DataFillter = Object.assign.apply({}, listCheck);
-        console.log(DataFillter)
+        //console.log(DataFillter)
         res.json(DataFillter);
       }
        
@@ -62,26 +62,75 @@ router.get("/:UID/:Date", (req, res) => {
 router.post("/:UID/:Date", (req, res) => {
   var uid = req.params.UID;
   var date = req.params.Date;
-
+  var data=req.body;
+//console.log(date)
   firebase
     .firebase()
-    .ref()
-    .child("notification/" + uid + "/" + date)
-    .push()
-    .set(req.body);
-  res.status(201).send("สำเร็จ");
+    .ref("notification/" + uid + "/" + date)
+    .push(data).once('value',d=>{
+      if(d != undefined || d != null || d != ''){
+        var json  = {
+            status: "OK",
+            data: d.val()
+        }
+     
+        res.status(200).json(json);
+    }
+    else {
+      var json  = {
+          status: 500,
+          err: d.val()
+      }
+      //console.log(json)
+      res.status(500).json(json);
+  }
+
+    })
+    
+ 
 });
 
-
+// delete date of notification
 router.delete('/delete/:UID/:Date/:Key', (req, res) => {
   var key=req.params.Key
   var uid = req.params.UID;
   var date = req.params.Date;
 
-  firebase.firebase().ref().child("notification/"+uid+"/"+date+"/"+key).remove();
- 
-
- 
+  firebase.firebase().ref("notification/"+uid+"/"+date+"/"+key).remove();
 })
+
+
+router.get("/CheckUp/:UID/:Date", (req, res) => {
+  var uid = req.params.UID;
+  var date = req.params.Date;
+
+  //ดึงข้อมูลมาทั้งหมด
+  firebase
+    .firebase()
+    .ref()
+    .child("notification/" + uid)
+    .once("value", snapshot => {
+      //console.log(snapshot.val())
+      var list = [];
+      var listDate = [];
+
+      snapshot.forEach(elem => {
+        listDate.push(elem.key);//วันที่ทั้งหมด
+        list.push(elem.val());//รายการของแต่ละวันที่
+      });
+      if(list.length!==0){
+        const DataFillter = Object.assign.apply({}, list);
+        res.json(DataFillter)
+      }
+      else{
+        const listEmpty={date:'No'}
+        res.json(listEmpty)
+      }
+  
+    
+     
+    
+    });
+});
 
 module.exports = router;

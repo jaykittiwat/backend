@@ -9,7 +9,8 @@ const history=require("./routecow/manageDam/history");
 const notification=require("./routecow/manageDam/notification")
 const maintain=require('./routecow/manageDam/maintain');
 const synchronize=require('./routecow/manageDam/synchronize');
-
+const breed=require('./routecow/manageDam/breed');
+const abdominal=require('./routecow/manageDam/abdominal')
 //body-paser สำหรับ post method
 app.locals.firebase = firebase;
 app.use(bodyParser.json());
@@ -40,6 +41,8 @@ app.use("/history", header, history); //จัดการแม่โคบำ�
 app.use("/maintain", header, maintain); //จัดการแม่โคบำรุง
 app.use("/notification", header, notification); //จัดการแม่โคบำรุง
 app.use("/synchronize", header, synchronize); //เหี่นยวนำ
+app.use("/breed", header, breed); //ผสม
+app.use("/abdominal", header,abdominal);//ตรวจท้อง
 
 const port = 4000;
 app.listen(port, () => {
