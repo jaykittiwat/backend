@@ -7,13 +7,9 @@ var firebase = require("../../firebase");
 
     router.post("/:UID", (req, res) => {
     
-        var uid=req.params.UID; 
-    
-            firebase
-            .firebase()
-            .ref("breed/"+uid)
-            .push(req.body)
-      
+        var uid = req.params.UID;
+        var data = req.body;
+        firebase.firebase().ref('abdominal/'+uid).push(data)
          
         });
 

@@ -95,7 +95,6 @@ router.delete('/delete/:UID/:Date/:Key', (req, res) => {
   var key=req.params.Key
   var uid = req.params.UID;
   var date = req.params.Date;
-
   firebase.firebase().ref("notification/"+uid+"/"+date+"/"+key).remove();
 })
 
@@ -119,6 +118,7 @@ router.get("/CheckUp/:UID/:Date", (req, res) => {
         list.push(elem.val());//รายการของแต่ละวันที่
       });
       if(list.length!==0){
+        //ถ้ามีตามเงือนไขเก็บโคทุกตัวแล้วไปกรองฝั่งclien
         const DataFillter = Object.assign.apply({}, list);
         res.json(DataFillter)
       }
