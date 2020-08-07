@@ -70,6 +70,7 @@ router.post("/:UID/:Date", (req, res) => {
     .push(data).once('value',d=>{
       if(d != undefined || d != null || d != ''){
         var json  = {
+          count:1,
             status: "OK",
             data: d.val()
         }
@@ -95,7 +96,8 @@ router.delete('/delete/:UID/:Date/:Key', (req, res) => {
   var key=req.params.Key
   var uid = req.params.UID;
   var date = req.params.Date;
-  firebase.firebase().ref("notification/"+uid+"/"+date+"/"+key).remove();
+  firebase.firebase().ref("notification/"+uid+"/"+date+"/"+key).remove()
+  res.json("yes")
 })
 
 

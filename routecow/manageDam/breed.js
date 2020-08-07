@@ -12,7 +12,11 @@ var firebase = require("../../firebase");
             firebase
             .firebase()
             .ref("breed/"+uid)
-            .push(req.body)
+            .push(req.body).once('value',result=>{
+                if(result.val!==undefined || d != null || d != ''){
+                    res.json("ok").status(200)
+                }
+            })
       
          
         });

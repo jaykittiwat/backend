@@ -8,10 +8,13 @@ router.post("/:UID", (req, res) => {
  
         firebase
         .firebase()
-        .ref()
-        .child("synchronize/"+uid)
-        .push()
-        .set(req.body);
+        .ref("synchronize/"+uid)
+        .push(req.body).once('value',result=>{
+           if(result.val!==undefined || d != null || d != ''){
+               res.json("ok").status(200)
+           }
+        })
+       
         
     });
 

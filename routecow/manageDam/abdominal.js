@@ -9,7 +9,11 @@ var firebase = require("../../firebase");
     
         var uid = req.params.UID;
         var data = req.body;
-        firebase.firebase().ref('abdominal/'+uid).push(data)
+        firebase.firebase().ref('abdominal/'+uid).push(data).once('value',result=>{
+            if(result.val!==undefined || d != null || d != ''){
+                res.json("ok").status(200)
+            }
+        })
          
         });
 
