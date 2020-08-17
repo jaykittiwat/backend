@@ -5,15 +5,11 @@ var firebase = require("./../../firebase");
 
 
 //ลงทะเบียนแม่โค
-router.post("/registor/:UID", (req, res) => {
+router.post("/registorCalf/:UID", (req, res) => {
   const UID=req.params.UID;
 
-      firebase
-      .firebase()
-      .ref()
-      .child("cattle/"+UID)
-      .push()
-      .set(req.body);
+      firebase.firebase().ref("calf/"+UID).push(req.body)
+    
     res.status(201).json(req.body);
   });
   
