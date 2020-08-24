@@ -30,7 +30,7 @@ router.get('/show/:UID/:idCattle',  (req, res)=> {
     .once("value", snapshot => {
       if(snapshot.val()!==null){
         res.json(snapshot.val())
-        
+       //console.log(snapshot.val());
       }
     else{
       res.send("ไม่มีข้อมูล")

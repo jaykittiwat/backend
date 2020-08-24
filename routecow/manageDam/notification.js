@@ -13,7 +13,7 @@ router.get("/notiAll/:UID", (req, res) => {
       var list = [];
       var listDate = [];
       snapshot.forEach(elem => {
-        listDate.push(elem.key);//วันที่ทั้งหมด
+        listDate.push(elem.key);//keyวันที่ทั้งหมด
         list.push(elem.val());//รายการของแต่ละวันที่
       });
       //เก็บข้อมูบลโคที่ต้องมีการแจ้งเตือน

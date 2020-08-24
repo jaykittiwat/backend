@@ -4,6 +4,7 @@ var firebase = require("../firebase.js");
 // :uid รับตัวอักษร
 router.get("/logIn/:uid", (req, res) => {
   const UID = req.params.uid;
+
   firebase
     .firebase()
     .ref()
@@ -17,7 +18,7 @@ router.get("/logIn/:uid", (req, res) => {
         list.push(elem.val());
       });
       res.json(list) /*.status(201)*/;
-      //console.log(list);
+   
     });
 });
 router.get("/profile/:uid", (req, res) => {
@@ -28,7 +29,7 @@ router.get("/profile/:uid", (req, res) => {
     .child("User")
     .orderByChild("email")
     .equalTo(UID)
-    .on("value", snapshot => {
+    .once("value", snapshot => {
     
       var list = [];
       var keylist=[]

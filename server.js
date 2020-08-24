@@ -60,7 +60,7 @@ app.use("/delivery", header, delivery); //ตรวจท้อง
 app.use("/settingbrand", header, brand); //ตัั้งค่าแบรน
 app.use("/settingcolor", header, color); //ตัั้งค่าสีโค
 app.use("/settingdrug", header, drug); //ตัั้งค่ายา
-app.use("/settingherd", header, herd); //ตัั้งค่าโรงเรือน
+app.use("/settingherd_num", header, herd); //ตัั้งค่าโรงเรือน
 app.use("/settingbigcorral", header, bigcorral); //ตัั้งค่าคอก
 app.use("/settingcorral", header, corral); //ตัั้งค่าฝูง
 app.use("/settingprogram_maintain", header, program_maintain); //ตัั้งค่าprogram_maintain
