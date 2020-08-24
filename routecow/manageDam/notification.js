@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var firebase = require("../../firebase");
+
 router.get("/notiAll/:UID", (req, res) => {
   var uid = req.params.UID;
   firebase
@@ -157,10 +158,6 @@ router.get("/CheckUp/:UID/:Date", (req, res) => {
         const listEmpty={date:'No'}
         res.json(listEmpty)
       }
-  
-    
-     
-    
     });
 });
 

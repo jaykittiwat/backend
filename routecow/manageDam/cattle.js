@@ -13,6 +13,7 @@ router.get('/show/:UID',  (req, res)=> {
     .equalTo("MISS")
     .once("value", snapshot => {
      res.send(snapshot.val())
+
     });
   
   })
@@ -29,6 +30,7 @@ router.get('/show/:UID/:idCattle',  (req, res)=> {
     .once("value", snapshot => {
       if(snapshot.val()!==null){
         res.json(snapshot.val())
+        
       }
     else{
       res.send("ไม่มีข้อมูล")
