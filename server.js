@@ -16,6 +16,7 @@ const delivery = require("./routecow/manageDam/delivery");
 const brand = require("./routecow/setting/farm/brand");
 const color = require("./routecow/setting/farm/color");
 const drug =require("./routecow/setting/farm/drug");
+const vaccine = require("./routecow/setting/farm/vaccine");
 const herd = require("./routecow/setting/farm/herd_num");
 const program_maintain = require("./routecow/setting/farm/program_maintain");
 const program_sync= require("./routecow/setting/farm/program_sync");
@@ -60,6 +61,7 @@ app.use("/delivery", header, delivery); //ตรวจท้อง
 app.use("/settingbrand", header, brand); //ตัั้งค่าแบรน
 app.use("/settingcolor", header, color); //ตัั้งค่าสีโค
 app.use("/settingdrug", header, drug); //ตัั้งค่ายา
+app.use("/settingvaccine", header, vaccine); //ตัั้งค่ายา
 app.use("/settingherd_num", header, herd); //ตัั้งค่าโรงเรือน
 app.use("/settingbigcorral", header, bigcorral); //ตัั้งค่าคอก
 app.use("/settingcorral", header, corral); //ตัั้งค่าฝูง

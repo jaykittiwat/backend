@@ -2,12 +2,12 @@ var express = require("express");
 var router = express.Router();
 var firebase = require("../../../firebase");
 //แบรนยาฟาร์ม
-router.get("/drug/:UID",(req,res)=>{
+router.get("/vaccine/:UID",(req,res)=>{
   var uid = req.params.UID;
 
   firebase
     .firebase()
-    .ref("setting/farm/drug/" + uid)
+    .ref("setting/farm/vaccine/" + uid)
     .once("value", snapshot => {
       var list = [];
       var KEY = [];
@@ -19,22 +19,21 @@ router.get("/drug/:UID",(req,res)=>{
       res.json(keyListgroup);
     });
 })
-router.post("/drug/:UID", (req, res) => {
+router.post("/vaccine/:UID", (req, res) => {
   var uid = req.params.UID;
   var data = req.body
   firebase
     .firebase()
-    .ref("/setting/farm/drug/" + uid)
+    .ref("/setting/farm/vaccine/" + uid)
     .push(data).once('value',snapshot=>{
-    res.json(snapshot.val())
-    })
+        res.json(snapshot.val())
+        })
 });
-router.delete("/drug/:UID/:KEY",(req,res)=>{
+router.delete("/vaccine/:UID/:KEY",(req,res)=>{
   var uid = req.params.UID;
   var key = req.params.KEY;
-  firebase.firebase().ref("/setting/farm/drug/"+uid+"/"+key).remove()
+  firebase.firebase().ref("/setting/farm/vaccine/"+uid+"/"+key).remove()
   res.end()
-  console.log(uid)
 })
 
 module.exports = router;
