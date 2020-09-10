@@ -15,3 +15,6 @@ var config = {
   exports.firebase = function(){
     return firebase.database();
   }
+  exports.firebaseStorage=function () {
+    return firebase.storage();
+  }
