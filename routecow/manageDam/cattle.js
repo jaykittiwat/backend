@@ -1,7 +1,25 @@
 var express = require("express");
 var router = express.Router();
 var firebase = require("../../firebase");
-
+//บำรุง
+router.get('/showAll/:UID',  (req, res)=> {
+  const uid = req.params.UID;
+  firebase
+    .firebase()
+    .ref()
+    .child("cattle/"+uid)
+    .once("value", snapshot => {
+      var list = [];
+      var KEY = [];
+      var keyListgroup = [KEY, list];
+      snapshot.forEach(elem => {
+        KEY.push(elem.key); //วันที่ทั้งหมด
+        list.push(elem.val()); //รายการของแต่ละวันที่
+      });
+      res.json(keyListgroup);
+    });
+  
+  })
 //บำรุง
 router.get('/show/:UID',  (req, res)=> {
   const uid = req.params.UID;

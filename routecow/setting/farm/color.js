@@ -3,7 +3,7 @@ var router = express.Router();
 var firebase = require("../../../firebase");
 router.get("/color/:UID", (req, res) => {
   var uid = req.params.UID;
-  const time = new Date();
+  //const time = new Date();
   //console.log("color|||| "+time+"User:"+uid)
   firebase
     .firebase()
