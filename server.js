@@ -25,7 +25,6 @@ const bigcorral = require("./routecow/setting/farm/bigcorral");
 const corral =  require("./routecow/setting/farm/corral");
 const settingNoti =  require("./routecow/setting/farm/notification");
 const calf =require("./routecow/manageCalf/calf")
-const tatoo=require("./routecow/manageCalf/tatto")
 const dishorn=require("./routecow/manageCalf/dishorn")
 const branding=require("./routecow/manageCalf/branding")
 const wean=require("./routecow/manageCalf/wean")
@@ -75,7 +74,6 @@ app.use("/settingprogram_sync", header, program_sync); //ตัั้งค่�
 app.use("/settingstrian", header, strian); 
 app.use("/settingNoti", header, settingNoti ); 
 app.use("/calf", header, calf); 
-app.use("/tatoo", header, tatoo); 
 app.use("/dishorn", header, dishorn); 
 app.use("/branding", header, branding); 
 app.use("/wean", header, wean); 

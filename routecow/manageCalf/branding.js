@@ -31,5 +31,13 @@ router.post("/:UID", (req, res) => {
       }
     });
 });
+router.post("/update/:UID/:key_cattle", (req, res) => {
+  var key=req.params.key_cattle;
+  var uid=req.params.UID; 
+ firebase.firebase().ref("branding/"+uid+"/"+key).update(req.body);
+ res.send("บันทึกสำเร็จ")
+ res.end();
+
+});
 
 module.exports = router;

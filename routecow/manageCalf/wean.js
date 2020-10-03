@@ -5,7 +5,7 @@ router.get("/:UID", (req, res) => {
     const uid = req.params.UID;
     firebase
       .firebase()
-      .ref("wean/" + uid)
+      .ref("wean/"+uid)
       .once("value", (snapshot) => {
         var list = [];
         var KEY = [];
@@ -14,7 +14,7 @@ router.get("/:UID", (req, res) => {
           KEY.push(elem.key);
           list.push(elem.val());
         });
-        res.json(keyListgroup);
+        res.json(keyListgroup)
       });
   });
   
@@ -29,5 +29,13 @@ router.get("/:UID", (req, res) => {
           res.json("ok").status(200);
         }
       });
+  });
+  router.post("/update/:UID/:key_cattle", (req, res) => {
+    var key=req.params.key_cattle;
+    var uid=req.params.UID; 
+   firebase.firebase().ref("wean/"+uid+"/"+key).update(req.body);
+   res.send("บันทึกสำเร็จ")
+   res.end();
+
   });
 module.exports = router;
