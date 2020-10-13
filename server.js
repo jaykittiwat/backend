@@ -28,6 +28,7 @@ const calf =require("./routecow/manageCalf/calf")
 const dishorn=require("./routecow/manageCalf/dishorn")
 const branding=require("./routecow/manageCalf/branding")
 const wean=require("./routecow/manageCalf/wean")
+const treatment=require("./routecow/treatmant/treatment")
 //body-paser สำหรับ post method
 app.locals.firebase = firebase;
 app.use(bodyParser.json());
@@ -77,6 +78,7 @@ app.use("/calf", header, calf);
 app.use("/dishorn", header, dishorn); 
 app.use("/branding", header, branding); 
 app.use("/wean", header, wean); 
+app.use("/treatment", header, treatment);
 
 
 
