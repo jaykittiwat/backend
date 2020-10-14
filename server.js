@@ -83,7 +83,7 @@ app.use("/treatment", header, treatment);
 
 
 
-const port = 4000;
-app.listen(port, () => {
+const PORT = 4000||process.env.PORT;
+app.listen(PORT, () => {
   console.log("Application is running on port " + port);
 });
