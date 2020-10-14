@@ -17,7 +17,8 @@ router.get("/logIn/:uid", (req, res) => {
       snapshot.forEach(elem => {
         list.push(elem.val());
       });
-      res.json(list) /*.status(201)*/;
+      
+      res.json(list).send(list)/*.status(201)*/;
    
     });
 });
