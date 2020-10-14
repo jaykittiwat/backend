@@ -2,6 +2,9 @@ var express = require("express");
 var router = express.Router();
 var firebase = require("../firebase.js");
 // :uid รับตัวอักษร
+router.get("/hello", (req, res) => {
+      res.send('Hello World')
+})
 router.get("/logIn/:uid", (req, res) => {
   const UID = req.params.uid;
 
