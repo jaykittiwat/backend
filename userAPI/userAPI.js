@@ -19,7 +19,7 @@ router.get("/logIn/:uid", (req, res) => {
       });
       
       res.json(list)
-      
+      res.send("hi")
    
     });
 });
