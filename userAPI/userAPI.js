@@ -18,7 +18,8 @@ router.get("/logIn/:uid", (req, res) => {
         list.push(elem.val());
       });
       
-      res.json(list).send(list)/*.status(201)*/;
+      res.json(list)
+      res.send('Hello World')
    
     });
 });
