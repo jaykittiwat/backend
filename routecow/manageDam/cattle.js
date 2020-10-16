@@ -57,7 +57,27 @@ router.get('/show/:UID/:idCattle',  (req, res)=> {
   
   })
 
-
+  router.get("/checkClave/:uid/:id_cattle", (req, res) => {
+    const UID = req.params.uid;
+    const id_cattle=req.params.id_cattle
+    firebase
+      .firebase()
+      .ref()
+      .child("cattle/"+UID)
+      .orderByChild("cattle_id")
+      .equalTo(id_cattle)
+      .once("value", snapshot => {
+        
+        
+          var keyListgroup = [];
+          snapshot.forEach(elem => {
+            KEY=keyListgroup.push( elem.key) 
+            list=keyListgroup.push(elem.val())
+          });
+          res.json(keyListgroup);
+      
+      });
+  });
 
   router.post("/status/:UID/:key_cattle", (req, res) => {
     var key=req.params.key_cattle;

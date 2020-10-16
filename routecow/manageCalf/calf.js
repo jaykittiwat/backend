@@ -27,7 +27,6 @@ router.get('/calfshowAll/:UID',  (req, res)=> {
    firebase.firebase().ref("calf/"+uid+"/"+key).update(req.body);
    res.send("บันทึกสำเร็จ")
    res.end();
-//console.log(req.body);
   });
   
 
