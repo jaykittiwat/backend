@@ -29,7 +29,8 @@ const dishorn=require("./routecow/manageCalf/dishorn")
 const branding=require("./routecow/manageCalf/branding")
 const wean=require("./routecow/manageCalf/wean")
 const treatment=require("./routecow/treatmant/treatment")
-
+const  cors = require('cors')
+app.use(cors()) 
 //body-paser สำหรับ post method
 app.locals.firebase = firebase;
 app.use(bodyParser.json());

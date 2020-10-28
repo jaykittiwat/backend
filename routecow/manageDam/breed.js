@@ -12,7 +12,9 @@ router.get("/:UID/:cattle_id", (req, res) => {
     .equalTo(id)
     .once("value", (snapshot) => {
       res.send(snapshot.val());
+      
     });
+   
 });
 router.get("/lasttime/:UID/:cattle_id", (req, res) => {
   const uid = req.params.UID;

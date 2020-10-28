@@ -4,14 +4,11 @@ var firebase = require("../../firebase");
 
 
 router.post("/:UID", (req, res) => {  
-    
     const uid=req.params.UID; 
-//console.log(req.body)
         firebase
         .firebase()
         .ref("maintain/"+uid)
         .push(req.body).once('value',d=>{
-  //          console.log(d.val());
             if(d != undefined || d != null || d != ''){
                 var json  = {
                     status: "OK",

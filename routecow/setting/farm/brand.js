@@ -21,9 +21,8 @@ router.post("/brand/:UID", (req, res) => {
     .firebase()
     .ref("/setting/farm/brand/" + uid)
     .push(data)
-    .once("value", snapshot => {
-      //console.log(snapshot.val());
-    });
+    res.send("OK")
+    
 });
 
 router.post("/brandUpdata/:UID/:KEY", (req, res) => {

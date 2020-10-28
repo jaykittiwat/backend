@@ -57,11 +57,9 @@ router.get("/profile/:uid", (req, res) => {
 router.post("/registor", (req, res) => {
   firebase
     .firebase()
-    .ref()
-    .child("User")
-    .push()
-    .set(req.body);
-  res.status(201);
+    .ref("/User")
+    .push(req.body)
+    res.send("")
 });
 
 router.post("/updataProfile", (req, res) => {

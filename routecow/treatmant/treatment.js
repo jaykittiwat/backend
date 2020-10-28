@@ -16,7 +16,7 @@ router.get("/notiAll/:UID", (req, res) => {
         list.push(elem.val());//รายการของแต่ละวันที่
       });
       //เก็บข้อมูบลโคที่ต้องมีการแจ้งเตือน
-      const listEmpty={date:'No'}
+      const listEmpty={}
       const listCheck = [];
       for (let i = 0; i < listDate.length; i++) {
           listCheck.push(list[i]);//เก็บข้อมูล ที่ต้องมีการบันทึก    

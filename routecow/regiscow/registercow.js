@@ -10,10 +10,8 @@ router.post("/registor/:UID", (req, res) => {
 
       firebase
       .firebase()
-      .ref()
-      .child("cattle/"+UID)
-      .push()
-      .set(req.body);
+      .ref("/cattle/"+UID)
+      .push(req.body)
     res.status(201).json(req.body);
   });
   
