@@ -30,6 +30,30 @@ router.get("/notiAll/:UID", (req, res) => {
       }
     });
 });
+
+router.get("/history/:uid/:cattle_id", (req, res) => {
+  const UID = req.params.uid;
+  const cID= req.params.cattle_id;
+  firebase
+    .firebase()
+    .ref()
+    .child("treatment/"+UID)
+    .orderByChild("id")
+    .equalTo(cID)
+    .once("value", snapshot => {
+    
+    const list = [];
+    const keylist=[]
+      snapshot.forEach(elem => {
+        list.push(elem.val());
+        keylist.push(elem.key)
+      });
+      
+ 
+  res.json(list)
+    });
+});
+
 router.post("/:UID", (req, res) => {
   const UID=req.params.UID;
       firebase.firebase().ref("treatment/"+UID).push(req.body)
