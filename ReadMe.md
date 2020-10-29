@@ -38,4 +38,8 @@ git add README.md
 git commit -m "first commit"
 git remote add origin https://github.com/jaykittiwat/backend.git
 git push -u origin master
-                
+
+
+                    git add .
+                 git commit -m "update to remote githup"  
+                 git push -u origin master
