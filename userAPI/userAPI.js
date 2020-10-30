@@ -47,9 +47,54 @@ router.get("/profile/:uid", (req, res) => {
       lname: list[0].lname,
       phone_num: list[0].phone_num,
       privilege: list[0].privilege,
-      user: list[0].user
+      user: list[0].user,
+      adminfarm:list[0].adminfarm
     }
   res.json(resData)
+    });
+});
+router.get("/checkAdmin", (req, res) => {
+ 
+  firebase
+    .firebase()
+    .ref()
+    .child("User")
+    .orderByChild("privilege")
+    .equalTo("เจ้าของฟาร์ม")
+    .once("value", snapshot => {
+    
+      var list = [];
+      var keylist=[]
+      snapshot.forEach(elem => {
+        list.push(elem.val());
+        keylist.push(elem.key)
+      });
+   const privatelist=[]
+   list.map(i=>{
+     privatelist.push(i.user)
+   })
+  res.json(privatelist)
+    });
+});
+
+router.get("/checkemployee/:uid", (req, res) => {
+  const UID = req.params.uid;
+  firebase
+    .firebase()
+    .ref()
+    .child("User")
+    .orderByChild("adminfarm")
+    .equalTo(UID)
+    .once("value", snapshot => {
+    
+      var list = [];
+      var keylist=[]
+      snapshot.forEach(elem => {
+        list.push(elem.val());
+        keylist.push(elem.key)
+      });
+      res.json([keylist,list])
+ 
     });
 });
 
@@ -82,6 +127,15 @@ router.post("/updataProfile", (req, res) => {
   res.send("บันทึกสำเร็จ");
   res.end();
 });
-
+router.post("/status/employee", (req, res) => {
+  var key = req.body.key
+  var data={privilege:req.body.privilege}
+ firebase
+    .firebase()
+    .ref("/User/" + key)
+    .update(data);
+  res.send("บันทึกสำเร็จ");
+  res.end();
+});
 
 module.exports = router;
