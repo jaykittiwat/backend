@@ -2,6 +2,29 @@ var express = require("express");
 var router = express.Router();
 var firebase = require("../../../firebase");
 //แบรนยาฟาร์ม
+router.get("/program_sync_check/:uid/:proname", (req, res) => {
+  const UID = req.params.uid;
+  const cID= req.params.proname;
+  firebase
+    .firebase()
+    .ref()
+    .child("setting/farm/program_sync/"+UID)
+    .orderByChild("pro_sync")
+    .equalTo(cID)
+    .once("value", snapshot => {
+    
+    const list = [];
+    const keylist=[]
+      snapshot.forEach(elem => {
+        list.push(elem.val());
+        keylist.push(elem.key)
+      });
+      
+ 
+  res.json(list)
+    });
+});
+
 router.get("/program_sync/:UID",(req,res)=>{
   var uid = req.params.UID;
 

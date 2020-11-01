@@ -79,6 +79,7 @@ router.get('/show/:UID/:idCattle',  (req, res)=> {
       });
   });
 
+
   router.post("/status/:UID/:key_cattle", (req, res) => {
     var key=req.params.key_cattle;
     var uid=req.params.UID; 

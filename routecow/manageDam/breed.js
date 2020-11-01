@@ -16,6 +16,29 @@ router.get("/:UID/:cattle_id", (req, res) => {
     });
    
 });
+router.get("/history/:uid/:cattle_id", (req, res) => {
+  const UID = req.params.uid;
+  const cID= req.params.cattle_id;
+  firebase
+    .firebase()
+    .ref()
+    .child("breed/"+UID)
+    .orderByChild("dam_id")
+    .equalTo(cID)
+    .once("value", snapshot => {
+    
+    const list = [];
+    const keylist=[]
+      snapshot.forEach(elem => {
+        list.push(elem.val());
+        keylist.push(elem.key)
+      });
+      
+ 
+  res.json(list)
+    });
+});
+
 router.get("/lasttime/:UID/:cattle_id", (req, res) => {
   const uid = req.params.UID;
   const id = req.params.cattle_id;

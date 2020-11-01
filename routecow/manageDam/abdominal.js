@@ -3,6 +3,28 @@ var router = express.Router();
 var firebase = require("../../firebase");
 
 
+router.get("/history/:uid/:cattle_id", (req, res) => {
+    const UID = req.params.uid;
+    const cID= req.params.cattle_id;
+    firebase
+      .firebase()
+      .ref()
+      .child("abdominal/"+UID)
+      .orderByChild("dam_id")
+      .equalTo(cID)
+      .once("value", snapshot => {
+      
+      const list = [];
+      const keylist=[]
+        snapshot.forEach(elem => {
+          list.push(elem.val());
+          keylist.push(elem.key)
+        });
+        
+   
+    res.json(list)
+      });
+  });
 
 
     router.post("/:UID", (req, res) => {
