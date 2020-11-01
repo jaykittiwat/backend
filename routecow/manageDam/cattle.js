@@ -88,7 +88,23 @@ router.get('/show/:UID/:idCattle',  (req, res)=> {
    res.end();
 
   });
+  router.post("/status2/:UID/:cid", (req, res) => {
+    var uid=req.params.UID; 
+    var c_id=req.params.cid
+    firebase
+    .firebase()
+    .ref()
+    .child("cattle/"+uid)
+    .orderByChild("cattle_id")
+    .equalTo(c_id)
+    .once("value", snapshot => {
 
+     snapshot.forEach(elem => {
+      firebase.firebase().ref("cattle/"+uid+"/"+elem.key).update(req.body);
+    });
+    });
+
+  });
 
 
  

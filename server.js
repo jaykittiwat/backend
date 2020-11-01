@@ -29,6 +29,7 @@ const dishorn=require("./routecow/manageCalf/dishorn")
 const branding=require("./routecow/manageCalf/branding")
 const wean=require("./routecow/manageCalf/wean")
 const treatment=require("./routecow/treatmant/treatment")
+const abortion=require('./routecow/manageDam/abortion')
 const  cors = require('cors')
 app.use(cors()) 
 //body-paser สำหรับ post method
@@ -81,6 +82,7 @@ app.use("/dishorn", header, dishorn);
 app.use("/branding", header, branding); 
 app.use("/wean", header, wean); 
 app.use("/treatment", header, treatment);
+app.use("/abortion", header, abortion);
 
 
 

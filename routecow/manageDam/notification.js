@@ -88,7 +88,6 @@ router.get("/:UID/:Date", (req, res) => {
     });
 });
 
-
 router.post("/:UID/:Date", (req, res) => {
   var uid = req.params.UID;
   var date = req.params.Date;
@@ -130,7 +129,6 @@ router.delete('/delete/:UID/:Date/:Key', (req, res) => {
   res.json("yes")
 })
 
-
 router.get("/CheckUp/:UID/:Date", (req, res) => {
   var uid = req.params.UID;
   var date = req.params.Date;
@@ -161,6 +159,36 @@ router.get("/CheckUp/:UID/:Date", (req, res) => {
     });
 });
 
+router.delete('/delete2/:UID/:CID', (req, res) => {
+  var cid=req.params.CID
+  var uid = req.params.UID;
+  firebase
+  .firebase()
+  .ref()
+  .child("notification/" + uid)
+  .once("value", snapshot => {
+    snapshot.forEach(elem => {
+ let keydate=elem.key
+  firebase.firebase().ref().child("notification/" + uid+"/"+keydate).orderByChild("id_cattle").equalTo(cid).once("value", snapshot => {
+   snapshot.forEach(elem => {
+    firebase.firebase().ref("notification/"+uid+"/"+ keydate+"/"+elem.key).remove()
+  });
+  })
+    });
+   })
+
+ /* firebase
+  .firebase()
+  .ref()
+  .child("notification/" + uid)
+  .orderByChild("id_cattle")
+  .equalTo(cid)
+  .once("value", snapshot => {
+   console.log(snapshot.val());
+
+  });*/
+  
+})
 
 
 module.exports = router;
