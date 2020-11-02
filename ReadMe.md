@@ -25,8 +25,7 @@
 
 // เพิ่มเติม จัดการUser id
 https://firebase.google.com/docs/auth/admin/manage-users#node.js
-
-
+process.env.PORT==5968
 
 
 
