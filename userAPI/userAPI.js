@@ -17,6 +17,7 @@ router.get("/logIn/:uid", (req, res) => {
       snapshot.forEach(elem => {
         list.push(elem.val());
       });
+      res.send(process.env.PORT)
       res.json(list)
     });
 });
