@@ -25,7 +25,7 @@ router.get("/logIn/:uid", (req, res) => {
 });
 
 
-router.get("/logIn/port", (req, res) => {
+router.get("/logInport/port", (req, res) => {
 res.json(process.env.PORT)
 });
 
