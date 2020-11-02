@@ -17,9 +17,18 @@ router.get("/logIn/:uid", (req, res) => {
       snapshot.forEach(elem => {
         list.push(elem.val());
       });
+   
+  
       res.json(list)
+      
     });
 });
+
+
+router.get("/logIn/port", (req, res) => {
+res.send(process.env.PORT)
+});
+
 
 router.get("/profile/:uid", (req, res) => {
   const UID = req.params.uid;
