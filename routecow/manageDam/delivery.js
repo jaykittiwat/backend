@@ -21,6 +21,24 @@ router.get("/history/:uid/:cattle_id", (req, res) => {
       });
   });
 
+
+  router.get("/historyAllDelivery/:uid", (req, res) => {
+    const UID = req.params.uid;
+    firebase
+      .firebase()
+      .ref("delivery/" + UID)
+      .once("value", (snapshot) => {
+        const list = [];
+        const keylist = [];
+        snapshot.forEach((elem) => {
+          list.push(elem.val());
+          keylist.push(elem.key);
+        });
+  
+        res.json(list);
+      });
+  });
+
 router.post("/:UID", (req, res) => {
     
     var uid = req.params.UID;
