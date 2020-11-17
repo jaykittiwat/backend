@@ -34,7 +34,7 @@ router.delete("/drug/:UID/:KEY",(req,res)=>{
   var key = req.params.KEY;
   firebase.firebase().ref("/setting/farm/drug/"+uid+"/"+key).remove()
   res.end()
-  console.log(uid)
+ 
 })
 
 module.exports = router;
