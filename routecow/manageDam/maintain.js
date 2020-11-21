@@ -39,6 +39,72 @@ router.get("/historyAllMaintain/:uid", (req, res) => {
     });
 });
 
+router.get("/historyAllMaintain/:uid/:startDate/:endDate", (req, res) => {
+  const startDate=req.params.startDate
+  const UID = req.params.uid;
+  const endDate=req.params.endDate
+  
+  firebase
+    .firebase()
+    .ref("maintain/" + UID).orderByChild('date').startAt(startDate).endAt(endDate)
+    .once("value", (snapshot) => {
+      const list = [];
+      const keylist = [];
+      snapshot.forEach((elem) => {
+        list.push(elem.val());
+        keylist.push(elem.key);
+      });
+
+      res.json(list);
+    });
+});
+
+router.get("/historyAllMaintain/form01/:uid/:v/:mode", (req, res) => {
+
+   const UID = req.params.uid;
+   const v=req.params.v
+   const mode=req.params.mode
+  firebase
+    .firebase()
+    .ref("maintain/" + UID).orderByChild(mode).equalTo(v)
+    .once("value", (snapshot) => {
+      const list = [];
+      const keylist = [];
+      snapshot.forEach((elem) => {
+        list.push(elem.val());
+        keylist.push(elem.key);
+      });
+
+      res.json(list);
+    });
+});
+
+router.get("/historyAllMaintain/form02/:uid/:v/:startDate/:endDate/:mode", (req, res) => {
+
+  const startDate=req.params.startDate
+  const UID = req.params.uid;
+  const endDate=req.params.endDate
+  const v=req.params.v
+  const mode=req.params.mode
+ firebase
+   .firebase()
+   .ref("maintain/" + UID).orderByChild('date').startAt(startDate).endAt(endDate)
+   .once("value", (snapshot) => {
+     const list = [];
+     const keylist = [];
+     snapshot.forEach((elem) => {
+       const d =elem.val()
+       if(d[mode]===v){
+         list.push(elem.val());
+          keylist.push(elem.key);
+       }
+       
+     });
+
+     res.json(list);
+   });
+});
+
 router.post("/:UID", (req, res) => {
   const uid = req.params.UID;
   firebase
