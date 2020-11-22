@@ -16,6 +16,24 @@ router.get("/:UID/:cattle_id", (req, res) => {
     });
    
 });
+
+router.get("/historyAllBreed/line2/:uid", (req, res) => {
+  const UID = req.params.uid;
+  firebase
+    .firebase()
+    .ref("breed/" + UID)
+    .once("value", (snapshot) => {
+      const list = [];
+      const keylist = [];
+      snapshot.forEach((elem) => {
+        list.push(elem.val());
+        keylist.push(elem.key);
+      })
+      res.json(list);
+    });
+});
+
+
 router.get("/history/:uid/:cattle_id", (req, res) => {
   const UID = req.params.uid;
   const cID= req.params.cattle_id;
@@ -40,22 +58,6 @@ router.get("/history/:uid/:cattle_id", (req, res) => {
 });
 
 
-router.get("/historyAllBreed/:uid", (req, res) => {
-  const UID = req.params.uid;
-  firebase
-    .firebase()
-    .ref("breed/" + UID)
-    .once("value", (snapshot) => {
-      const list = [];
-      const keylist = [];
-      snapshot.forEach((elem) => {
-        list.push(elem.val());
-        keylist.push(elem.key);
-      });
-
-      res.json(list);
-    });
-});
 
 
 router.get("/lasttime/:UID/:cattle_id", (req, res) => {
