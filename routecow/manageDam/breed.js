@@ -103,6 +103,52 @@ router.get("/historyAllBreed/form02/:uid/:v/:startDate/:endDate/:mode", (req, re
 });
 
 
+router.get("/historyAllBreed/form03/:uid/:v/:mode", (req, res) => {
+
+  const UID = req.params.uid;
+  const v=req.params.v
+  const mode=req.params.mode
+ firebase
+   .firebase()
+   .ref("breed/" + UID).orderByChild(mode).equalTo(v)
+   .once("value", (snapshot) => {
+     const list = [];
+     const keylist = [];
+     snapshot.forEach((elem) => {
+       list.push(elem.val());
+       keylist.push(elem.key);
+     });
+
+     res.json(list);
+   });
+});
+
+router.get("/historyAllBreed/form04/:uid/:v/:startDate/:endDate/:mode", (req, res) => {
+
+ const startDate=req.params.startDate
+ const UID = req.params.uid;
+ const endDate=req.params.endDate
+ const v=req.params.v
+ const mode=req.params.mode
+firebase
+  .firebase()
+  .ref("breed/" + UID).orderByChild('date_breeding').startAt(startDate).endAt(endDate)
+  .once("value", (snapshot) => {
+    const list = [];
+    const keylist = [];
+    snapshot.forEach((elem) => {
+      const d =elem.val()
+      if(d[mode]===v){
+        list.push(elem.val());
+         keylist.push(elem.key);
+      }
+      
+    });
+
+    res.json(list);
+  });
+});
+
 ///////////////////////////////////////////////////////////
 
 router.get("/history/:uid/:cattle_id", (req, res) => {
