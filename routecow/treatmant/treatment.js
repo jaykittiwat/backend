@@ -54,6 +54,92 @@ router.get("/history/:uid/:cattle_id", (req, res) => {
     });
 });
 
+router.get("/historyAllTreatment/:uid", (req, res) => {
+  const UID = req.params.uid;
+  firebase
+    .firebase()
+    .ref()
+    .child("treatment/"+UID)
+    .once("value", snapshot => {
+    
+    const list = [];
+    const keylist=[]
+      snapshot.forEach(elem => {
+        list.push(elem.val());
+        keylist.push(elem.key)
+      });
+        res.json(list)
+    });
+});
+
+
+router.get("/historyAllTreatment/:uid/:startDate/:endDate", (req, res) => {
+  const startDate=req.params.startDate
+  const UID = req.params.uid;
+  const endDate=req.params.endDate
+  
+  firebase
+    .firebase()
+    .ref("treatment/" + UID).orderByChild('datediagnose').startAt(startDate).endAt(endDate)
+    .once("value", (snapshot) => {
+      const list = [];
+      const keylist = [];
+      snapshot.forEach((elem) => {
+        list.push(elem.val());
+        keylist.push(elem.key);
+      });
+
+      res.json(list);
+    });
+});
+
+router.get("/historyAllTreatment/form01/:uid/:v/:mode", (req, res) => {
+
+   const UID = req.params.uid;
+   const v=req.params.v
+   const mode=req.params.mode
+  firebase
+    .firebase()
+    .ref("treatment/" + UID).orderByChild(mode).equalTo(v)
+    .once("value", (snapshot) => {
+      const list = [];
+      const keylist = [];
+      snapshot.forEach((elem) => {
+        list.push(elem.val());
+        keylist.push(elem.key);
+      });
+
+      res.json(list);
+    });
+});
+
+router.get("/historyAllTreatment/form02/:uid/:v/:startDate/:endDate/:mode", (req, res) => {
+
+  const startDate=req.params.startDate
+  const UID = req.params.uid;
+  const endDate=req.params.endDate
+  const v=req.params.v
+  const mode=req.params.mode
+ firebase
+   .firebase()
+   .ref("treatment/" + UID).orderByChild('datediagnose').startAt(startDate).endAt(endDate)
+   .once("value", (snapshot) => {
+     const list = [];
+     const keylist = [];
+     snapshot.forEach((elem) => {
+       const d =elem.val()
+       if(d[mode]===v){
+         list.push(elem.val());
+          keylist.push(elem.key);
+       }
+       
+     });
+
+     res.json(list);
+   });
+});
+
+
 router.post("/:UID", (req, res) => {
   const UID=req.params.UID;
       firebase.firebase().ref("treatment/"+UID).push(req.body)
