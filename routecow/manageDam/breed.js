@@ -220,10 +220,12 @@ router.post("/:UID", (req, res) => {
     });
 });
 
-router.get("/graph/:uid/:startDate/:endDate", (req, res) => {
+router.get("/graph/:uid/:startDate/:endDate/:cattleID", (req, res) => {
   const startDate = req.params.startDate
   const UID = req.params.uid;
   const endDate = req.params.endDate
+  const Cattle=req.params.cattleID
+ 
   firebase.firebase().ref("breed/" + UID).orderByChild('date_breeding').startAt(startDate).endAt(endDate).once("value", (snapshot) => {
     const list = [];
     let y2016 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -243,10 +245,22 @@ router.get("/graph/:uid/:startDate/:endDate", (req, res) => {
     let y2030 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     const listYears = []
     let ArrmonthOfAllYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    snapshot.forEach((elem) => {
-      list.push(elem.val().date_breeding)
-
-    })
+    if(Cattle==="emtyp"){
+      snapshot.forEach((elem) => {
+        list.push(elem.val().date_breeding)
+  
+      })
+    }
+    else{
+      snapshot.forEach((elem) => {
+        if(Cattle===elem.val().dam_id){
+          list.push(elem.val().date_breeding)
+        }
+      
+  
+      })
+    }
+    
 
 
     list.forEach(i => {
@@ -856,6 +870,7 @@ router.get("/graph/:uid/:startDate/:endDate", (req, res) => {
     res.json([ArrmonthOfAllYear, y2016, y2017, y2018, y2019, y2020, y2021, y2022, y2023, y2024, y2025, y2026, y2027, y2027, y2028, y2029, y2030])
   })
 })
+
 
 
 module.exports = router;

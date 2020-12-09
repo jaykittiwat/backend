@@ -167,14 +167,14 @@ router.get("/graph/:uid/:startDate/:endDate/:cattleID", (req, res) => {
     let ArrmonthOfAllYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     if(Cattle==="emtyp"){
       snapshot.forEach((elem) => {
-        list.push(elem.val().date)
+        list.push(elem.val().datepro)
   
       })
     }
     else{
       snapshot.forEach((elem) => {
         if(Cattle===elem.val().dam_id){
-          list.push(elem.val().date)
+          list.push(elem.val().datepro)
         }
       
   
