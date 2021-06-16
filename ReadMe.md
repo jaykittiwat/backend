@@ -30,7 +30,7 @@ process.env.PORT==5968
 
 
 
-
+npm install
 echo "# backend" >> README.md
 git init
 git add README.md
